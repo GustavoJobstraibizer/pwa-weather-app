@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - PWA</title>
+    <link rel="stylesheet" href="assets/styles/reset.css">
+    <link rel="stylesheet" href="assets/styles/index.css">
+</head>
+<body>
+    <main class="container">
+        <h1 data-js="title" class="title">Today's Report from -</h1>
+
+        <div class="weather-temp">
+            <img data-js="data-weather-img" class="weather-temp__image" src="assets/images/cloudy.png" alt="todays climate">
+            <p data-js="weather-desc" class="weather-temp__text">It's -</p>
+            <h2 data-js="data-temperature" class="weather-temp__temperature">--</h2>
+        </div>
+
+        <div class="weather-info-content">
+            <div class="weather-info">
+                <img class="weather-info__image" src="assets/images/sun.png" alt="wind speed">
+                <span data-js="data-wind" class="weather-info__value">0 km/h</span>
+                <small class="weather-info__text">Sun</small>
+            </div>
+            <div class="weather-info">
+                <img class="weather-info__image" src="assets/images/rainy-day.png" alt="humidity">
+                <span data-js="data-humidity" class="weather-info__value">0%</span>
+                <small class="weather-info__text">Humidity</small>
+            </div>
+            <div class="weather-info">
+                <img class="weather-info__image" src="assets/images/rain.png" alt="percentage">
+                <span data-js="data-km-other" class="weather-info__value">0 km/h</span>
+                <small class="weather-info__text">Chance of rain</small>
+            </div>
+        </div>
+        
+        <input data-js="search-city" class="weather-search" type="text" aria-label="search your country weather" placeholder="Type your location" />
+    </main>
+    <script src="assets/scripts/index.js"></script>
+</body>
+</html>
