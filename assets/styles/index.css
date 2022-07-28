@@ -162,7 +162,6 @@ body {
     outline: none;
     font-size: 1.4rem;
     color: var(--color-neutral-300);
-    text-align: center;
     flex: 5;
 }
 
