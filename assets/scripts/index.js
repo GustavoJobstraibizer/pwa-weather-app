@@ -52,21 +52,26 @@ const WEATHER_APP = {
         }
     },
 
-    async _handleSearchCity(event) {
-        if (event.key === 'Enter' && event.target.value) {
-            const url = `${this.api.url}/weather?q=${event.target.value}&appid=${this.api.key}&lang=${this.api.lang}&units=${this.api.units}`
+    async _handleSearchCity() {
+        const city = this.searchCity.value;
 
-            const response = await this._searchWeather(url);
+        if (!city) return;
 
-            const cities = (JSON.parse(localStorage.getItem('listOfCities'))) ?? []
+        const url = `${this.api.url}/weather?q=${city}&appid=${this.api.key}&lang=${this.api.lang}&units=${this.api.units}`
 
-            this._setInfoWeather(response)
+        const response = await this._searchWeather(url);
 
-            if (cities.includes(event.target.value)) return
+        this.searchCity.value = '';
+        this.searchCity.focus();
 
-            this.listOfCitiesSearched = [...cities, event.target.value];
-            localStorage.setItem('listOfCities', JSON.stringify(this.listOfCitiesSearched))
-        }
+        const cities = (JSON.parse(localStorage.getItem('listOfCities'))) ?? []
+
+        this._setInfoWeather(response)
+
+        if (cities.includes(city)) return
+
+        this.listOfCitiesSearched = [...cities, city];
+        localStorage.setItem('listOfCities', JSON.stringify(this.listOfCitiesSearched))
     },
 
     _setInfoWeather({ temperature, humidity, city, weatherDesc, wind: { speed } }) {
@@ -88,6 +93,7 @@ const WEATHER_APP = {
         this.title = document.querySelector('[data-js="title"]')
         this.weatherDesc = document.querySelector('[data-js="weather-desc"]')
         this.weatherImg = document.querySelector('[data-js="data-weather-img"]')
+        this.btnSearch = document.querySelector('[data-js="search-city-btn"]')
 
         const setPosition = async (position) => {
             this.coords.lat = position.coords.latitude
@@ -111,7 +117,7 @@ const WEATHER_APP = {
             navigator.geolocation.getCurrentPosition(setPosition)
         }
 
-        this.searchCity.addEventListener('keydown', (e) => this._handleSearchCity(e))
+        this.btnSearch.addEventListener('click', () => this._handleSearchCity())
     }
 }
 
